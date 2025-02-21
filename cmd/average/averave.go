@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	numbers, err := datafile.GoFloats("cmd/average/data")
+	numbers, err := datafile.GetFloats("cmd/average/data")
 	if err != nil {
 		log.Fatal(err)
 	}
