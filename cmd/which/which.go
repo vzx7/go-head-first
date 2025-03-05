@@ -24,11 +24,9 @@ func main() {
 			continue
 		}
 		mode := fileInfo.Mode()
-		if mode.IsRegular() {
-			if mode&111 != 0 {
-				fmt.Println(fullPath)
-				return
-			}
+		if mode.IsRegular() && mode&111 != 0 {
+			fmt.Println(fullPath)
+			return
 		}
 	}
 }
