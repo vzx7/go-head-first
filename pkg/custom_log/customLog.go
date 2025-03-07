@@ -16,7 +16,8 @@ func Log() {
 	}
 	fmt.Println("Log create...", "in", os.TempDir())
 	defer f.Close()
-	iLog := log.New(f, "iLog", log.LstdFlags)
-	iLog.Println("Hello there")
+	LstdFlags := log.Ldate | log.Lshortfile | log.LstdFlags
+	iLog := log.New(f, "", LstdFlags)
 	iLog.Println("Mastering Go 3rd editing")
+	iLog.Println("Another log entry...")
 }

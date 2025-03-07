@@ -1,6 +1,7 @@
 package customlog
 
 import (
+	"fmt"
 	"os"
 	"path"
 	"strings"
@@ -19,8 +20,10 @@ func TestLog(t *testing.T) {
 	if err != nil {
 		t.Error("Error!", err)
 	}
-	l := len(strings.Split(string(fContent), ""))
+	s := string(fContent)
+	l := len(strings.Split(s, ""))
 	if l == 0 {
 		t.Error("Error, file empty.")
 	}
+	fmt.Println(s)
 }
