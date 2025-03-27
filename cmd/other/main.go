@@ -1,9 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"os"
 	"sort"
 
+	jsonparser "github.com/vzx7/go-head-first/pkg/json_parser"
 	"github.com/vzx7/go-head-first/pkg/reflection"
 	S "github.com/vzx7/go-head-first/pkg/sort"
 )
@@ -18,6 +21,7 @@ func main() {
 	reflection.DoReflect()
 	reflection.DoModifyByReflect()
 	doSort(data)
+	jsonParse()
 }
 
 func doSort(data []S.S2) {
@@ -26,4 +30,23 @@ func doSort(data []S.S2) {
 	fmt.Println("after:", data)
 	sort.Sort(sort.Reverse(S.S2slice(data)))
 	fmt.Println("reverse:", data)
+}
+
+func jsonParse() {
+	JSONData := jsonparser.JSONRecord
+	if len(os.Args) == 1 {
+		fmt.Println("*** Using default JSON record.")
+	} else {
+		JSONData = os.Args[1]
+	}
+
+	JSONMap := make(map[string]any)
+	err := json.Unmarshal([]byte(JSONData), &JSONMap)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	jsonparser.ExploreMap(JSONMap)
+	jsonparser.TypeSwitch(JSONMap)
 }
